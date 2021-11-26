@@ -1,8 +1,10 @@
+const AuthRoute = require("./auth");
 const UserRoute = require("./user");
 
 
 const Router = {
-    User: UserRoute
+    User: UserRoute,
+    Auth: AuthRoute
 }
 
 
