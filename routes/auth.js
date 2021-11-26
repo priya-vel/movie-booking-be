@@ -1,3 +1,4 @@
+const AuthService = require("../services/auth.service");
 const { UserService } = require("../services/user.service");
 
 const AuthRoute = require("express").Router()
@@ -10,11 +11,14 @@ AuthRoute.post("/register", async (req, res) => {
             throw "user with same email already exists"
         }
         const resData = await UserService.createOne(body);
-        res.status(201).json({data: resData})
+        const token = await AuthService.createToken(resData._id);
+        res.status(201).json({token})
     } catch (err) {
         res.status(409).json({error: err})
     }
 })
+
+
 
 
 module.exports = AuthRoute;
