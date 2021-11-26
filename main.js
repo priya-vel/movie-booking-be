@@ -1,7 +1,8 @@
 const express = require("express");
 const { DBConnection } = require("./config/db");
 const { json, urlencoded } = express;
-const { Config } = require("./config/index")
+const { Config } = require("./config/index");
+const Router = require("./routes");
 // initializing app
 const app = express();
 DBConnection().then((res) => {
@@ -14,6 +15,9 @@ DBConnection().then((res) => {
 // initializing global middleware
 app.use(urlencoded({extended: true}))
 app.use(json())
+
+// registering routes
+app.use("/user", Router.User)
 
 
 // starting server
