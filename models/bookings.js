@@ -28,6 +28,10 @@ const BookingsModel = model("Bookings", Schema({
     },
     user: {
         type: SchemaTypes.ObjectId,
+    },
+    even: {
+        type: Number,
+        require: true
     }
 }, { tiemstamps: true }))
 
