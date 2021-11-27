@@ -31,7 +31,6 @@ const Authendication = () => {
 const Authorization = (types) => {
   return async function (req, res, next) {
     try {
-      console.log(req.user);
       for (let i = 0; i < types.length; i++) {
         const userType = types[i];
         if (userType == req.user.type) {

@@ -32,7 +32,6 @@ AuthRoute.post("/login", async (req, res) => {
             })
         }
         const token = await AuthService.createToken(dbUser._id)
-        console.log(token);
         return res.status(200).json({
             token,
         })

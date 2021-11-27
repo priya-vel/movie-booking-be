@@ -1,14 +1,13 @@
 "use strict";
 const nodemailer = require("nodemailer");
-require("dotenv").config()
+require("dotenv").config();
 const { Config } = require("../config");
 const { decrypt } = require("./encrypt");
 const auth = {
-    user: decrypt(Config.SECRET, Config.EMAIL), // generated ethereal user
-    pass: decrypt(Config.SECRET, Config.PASS_DATA), // generated ethereal password
-  }
+  user: decrypt(Config.SECRET, Config.EMAIL), // generated ethereal user
+  pass: decrypt(Config.SECRET, Config.PASS_DATA), // generated ethereal password
+};
 
-  console.log(auth);
 
 // async..await is not allowed in global scope, must use a wrapper
 async function sendMaill(to, subject, message) {
@@ -23,16 +22,15 @@ async function sendMaill(to, subject, message) {
 
   // send mail with defined transport object
   let info = await transporter.sendMail({
-    from: 'Show Booking', // sender address
+    from: "Show Booking", // sender address
     to: to, // list of receivers
     subject, // Subject line
     text: message, // plain text body
     // html: "<b>Hello world?</b>", // html body
   });
-  return info
+  return info;
 }
 
 module.exports = {
-    sendMaill
-}
-
+  sendMaill,
+};
