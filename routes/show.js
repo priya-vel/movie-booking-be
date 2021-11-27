@@ -22,6 +22,31 @@ ShowRoute.post(
   }
 );
 
+ShowRoute.get(
+  "/",
+  async (req, res) => {
+    try {
+      const data = await ShowService.getShows({})
+      return res.status(200).json({ data });
+    } catch (err) {
+      res.status(500).json({error: err})
+    }
+  }
+)
+
+ShowRoute.get(
+  "/:id",
+  async (req, res) => {
+    try {
+      const data = await ShowService.getOne(req.params.id)
+      return res.status(200).json({ data });
+    } catch (err) {
+      res.status(500).json({error: err})
+    }
+  }
+)
+
+
 module.exports = {
   ShowRoute,
 };

@@ -15,6 +15,9 @@ const ShowService = {
     async getShows(filter) {
         let sort = {createdAt: -1}
         return ShowModel.find(filter).sort(sort)
+    },
+    async getOne(_id) {
+        return ShowModel.findOne({_id})
     }
 }
 
