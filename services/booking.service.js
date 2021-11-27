@@ -30,4 +30,7 @@ const BookingService = {
   async bookings(filter) {
     return BookingsModel.find(filter).lean().exec()
   },
+  async getOne(filter) {
+    return BookingsModel.findOne(filter)
+  },
 };
