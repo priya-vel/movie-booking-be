@@ -18,6 +18,7 @@ app.use(json())
 
 // registering routes
 app.use("/user", Router.User)
+app.use("/auth", Router.Auth)
 
 
 // starting server
