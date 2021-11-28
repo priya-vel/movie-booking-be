@@ -13,7 +13,7 @@ AuthRoute.post("/register", async (req, res) => {
         }
         const resData = await UserService.createOne(body);
         const token = await AuthService.createToken(resData._id);
-        res.status(201).json({token})
+        res.status(201).json({token, name: resData.name, email: resData.email})
     } catch (err) {
         res.status(409).json({error: err})
     }
@@ -34,6 +34,8 @@ AuthRoute.post("/login", async (req, res) => {
         const token = await AuthService.createToken(dbUser._id)
         return res.status(200).json({
             token,
+            email: dbUser.email,
+            name: dbUser.name,
         })
     } catch (err) {
         console.log(err);

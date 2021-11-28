@@ -13,16 +13,18 @@ const TheaterService = {
     })
   },
   async getOne(filter) {
-    return UserModel.findOne(filter).exec();
+    return TheaterModel.findOne(filter)
   },
   async getMany(filter) {
-    return UserModel.find(filter);
+    return TheaterModel.find(filter);
   },
   async updateOne(filter, data) {
-    return UserModel.updateOne(filter, { $set: data });
+    return TheaterModel.updateOne(filter, {
+      $set: data
+    });
   },
   async deleteOne(id) {
-    return UserModel.deleteOne({ _id: id });
+    
   },
 };
 

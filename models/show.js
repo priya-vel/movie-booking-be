@@ -4,6 +4,10 @@ const ShowModel = model("Show", Schema({
         type : String,
         required: true
     },
+    banner: {
+        type: String,
+        required: true
+    },
     trailer: {   
         type: String,
         required: true
@@ -19,6 +23,12 @@ const ShowModel = model("Show", Schema({
     theater: {
         type: SchemaTypes.ObjectId,
         require: true
+    },
+    owner: {
+        theater: {
+            type: SchemaTypes.ObjectId,
+            require: true
+        },
     }
 }, { tiemstamps: true }))
 

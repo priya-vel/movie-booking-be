@@ -7,7 +7,7 @@ const UserService = {
       email: data.email,
       name: data.name,
       password: "",
-      type: "user",
+      type: data.type,
     };
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(data.password, salt);
