@@ -4,6 +4,7 @@ const { BookingService } = require("../services/booking.service");
 const { ShowService } = require("../services/show.service");
 const { TheaterService } = require("../services/theater.service");
 
+
 const ShowRoute = require("express").Router();
 
 ShowRoute.post(
@@ -14,7 +15,7 @@ ShowRoute.post(
     try {
       const data = await ShowService.createShow(req.body);
       await TheaterService.addShow({ _id: req.body.theater }, data._id);
-      await BookingService.createBookingsForShow(data._id, req.body.theater)
+      await BookingService.createBookingsForShow(data._id, req.body.theater, )
       return res.status(200).json({ data });
     } catch (err) {
       console.log(err);
@@ -46,7 +47,7 @@ ShowRoute.put(
   Authendication(),
   async (req, res) => {
     try {
-      const data = await BookingService.bookShow(req.params.id, req.user._id)
+      const data = await BookingService.bookShow(req.params.id, req.user._id, req.user.email)
       return res.status(200).json({ data });
     } catch (err) {
       res.status(500).json({
