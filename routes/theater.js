@@ -1,4 +1,5 @@
 const { Authorization, Authendication } = require("../middleware/auth");
+const { ShowModel } = require("../models/show");
 const { TheaterService } = require("../services/theater.service");
 
 const TheaterRoute = require("express").Router();
@@ -10,17 +11,18 @@ TheaterRoute.post(
   async (req, res, next) => {
     let data = req.body;
     data.owner = req.user._id;
-    data.shows = []
+    data.shows = [];
     console.log(data);
     return TheaterService.createOne(data)
-    .then(data => {
+      .then((data) => {
         res.status(201).json({
-            data
-        })
-    }).catch(err => {
-      console.log(err);
-        res.status(500).json({error: err})
-    })
+          data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({ error: err });
+      });
   }
 );
 
@@ -31,56 +33,69 @@ TheaterRoute.get(
   async (req, res) => {
     const owner = req.user._id;
     return TheaterService.getMany({
-      owner, 
+      owner,
     })
-    .then(data => {
+      .then((data) => {
         res.status(200).json({
-            data
-        })
-    }).catch(err => {
-      console.log(err);
-        res.status(500).json({error: err})
-    })
+          data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({ error: err });
+      });
   }
-)
+);
 
-
-TheaterRoute.get(
-  "/:id",
-  async (req, res) => {
-    return TheaterService.getOne({
-      _id: req.params.id, 
+TheaterRoute.get("/:id", async (req, res) => {
+  return TheaterService.getOne({
+    _id: req.params.id,
+  })
+    .then((data) => {
+      res.status(200).json({
+        data,
+      });
     })
-    .then(data => {
-        res.status(200).json({
-            data
-        })
-    }).catch(err => {
+    .catch((err) => {
       console.log(err);
-        res.status(500).json({error: err})
+      res.status(500).json({ error: err });
+    });
+});
+
+TheaterRoute.get("/:id/shows", async (req, res) => {
+  return ShowModel.find({
+    theater: req.params.id,
+  })
+    .sort({ createdAt: -1 })
+    .then(async (data) => {
+      res.status(200).json({
+        data,
+      });
     })
-  }
-)
-
-
-
-TheaterRoute.put(
-  "/:id",
-  async (req, res) => {
-    return TheaterService.updateOne({
-      _id: req.params.id, 
-    }, {
-      name: req.body.name
-    })
-    .then(data => {
-        res.status(200).json({
-            data
-        })
-    }).catch(err => {
+    .catch((err) => {
       console.log(err);
-        res.status(500).json({error: err})
+      res.status(500).json({ error: err });
+    });
+});
+
+TheaterRoute.put("/:id", async (req, res) => {
+  return TheaterService.updateOne(
+    {
+      _id: req.params.id,
+    },
+    {
+      name: req.body.name,
+    }
+  )
+    .then((data) => {
+      res.status(200).json({
+        data,
+      });
     })
-  }
-)
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: err });
+    });
+});
 
 module.exports = TheaterRoute;

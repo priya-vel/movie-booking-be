@@ -11,7 +11,7 @@ const TheaterModel = model("theater", Schema({
         type: SchemaTypes.ObjectId,
         required: true
     }
-}, { tiemstamps: true }))
+}, { timestamps: true }))
 
 module.exports = {
     TheaterModel

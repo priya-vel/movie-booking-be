@@ -33,7 +33,7 @@ const BookingsModel = model("Bookings", Schema({
         type: Number,
         require: true
     }
-}, { tiemstamps: true }))
+}, { timestamps: true }))
 
 module.exports = {
     BookingsModel

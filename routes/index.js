@@ -8,7 +8,7 @@ const Router = {
     User: UserRoute,
     Auth: AuthRoute,
     Theater: TheaterRoute,
-    Show: ShowRoute
+    Show: ShowRoute,
 }
 
 

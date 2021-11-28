@@ -16,10 +16,6 @@ const ShowModel = model("Show", Schema({
         type: Date,
         required: true
     },
-    poster: {
-        type: String,
-        required: true
-    },
     theater: {
         type: SchemaTypes.ObjectId,
         require: true
@@ -30,7 +26,7 @@ const ShowModel = model("Show", Schema({
             require: true
         },
     }
-}, { tiemstamps: true }))
+}, { timestamps: true }))
 
 module.exports = {
     ShowModel
